@@ -1,5 +1,6 @@
 package com.yamasoft.vehiclecompanion.di
 
+import com.yamasoft.vehiclecompanion.data.remote.api.RoadtrippersApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,5 +32,11 @@ object NetworkModule {
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRoadtrippersApiService(retrofit: Retrofit): RoadtrippersApiService {
+        return retrofit.create(RoadtrippersApiService::class.java)
     }
 }
