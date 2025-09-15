@@ -50,5 +50,5 @@ fun Poi.toEntity(): PoiEntity {
 }
 
 // List extensions
-fun List<PoiDto>.toDomain(): List<Poi> = map { it.toDomain() }
-fun List<PoiEntity>.toDomain(): List<Poi> = map { it.toDomain() }
+fun List<PoiDto>.mapDtosToDomain(): List<Poi> = map { it.toDomain() }
+fun List<PoiEntity>.mapEntitiesToDomain(): List<Poi> = map { it.toDomain() }
