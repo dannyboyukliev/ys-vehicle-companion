@@ -19,6 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import com.yamasoft.vehiclecompanion.ui.components.VehicleCompanionBottomBar
 import com.yamasoft.vehiclecompanion.ui.screen.garage.add.AddVehicleScreen
 import com.yamasoft.vehiclecompanion.ui.screen.garage.GarageScreen
+import com.yamasoft.vehiclecompanion.ui.screen.garage.edit.EditVehicleScreen
 
 @Composable
 fun MainScreen() {
@@ -74,6 +75,13 @@ fun VehicleCompanionNavigation(
 
             composable(Route.ADD_VEHICLE) {
                 AddVehicleScreen(navController)
+            }
+
+            composable(Route.EDIT_VEHICLE) { backStackEntry ->
+                val vehicleId = backStackEntry.arguments?.getString("vehicleId")?.toLongOrNull()
+                if (vehicleId != null) {
+                    EditVehicleScreen(navController = navController)
+                }
             }
         }
     }
