@@ -6,8 +6,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +27,7 @@ import com.yamasoft.vehiclecompanion.ui.theme.VehicleCompanionTheme
 @Composable
 fun VehicleCard(
     vehicle: Vehicle,
+    onDeleteButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -65,6 +70,15 @@ fun VehicleCard(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
+
+            // Delete icon button
+            IconButton(
+                onClick = onDeleteButtonClick
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = "Remove ${vehicle.name} from your garage")
+            }
         }
     }
 }
@@ -77,6 +91,7 @@ fun VehicleCardPreview() {
     VehicleCompanionTheme {
         VehicleCard(
             vehicle = myVehicle,
+            onDeleteButtonClick = {},
         )
     }
 }
