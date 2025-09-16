@@ -170,7 +170,8 @@ private fun GarageScreenContentWithVehiclesPreview() {
         GarageScreenContent(
             uiState = GarageUiState(listOf(Vehicle(name = "My Car", make = "Toyota", model = "Avensis", year = 2009))),
             onAddVehicleClick = {},
-            onDeleteVehicle = {}
+            onDeleteVehicle = {},
+            onVehicleClick = {}
         )
     }
 }
