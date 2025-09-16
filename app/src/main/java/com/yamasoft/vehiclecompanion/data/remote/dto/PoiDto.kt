@@ -18,7 +18,7 @@ data class PoiDto(
     val primaryCategoryDisplayName: String?,
 
     @Json(name = "rating")
-    val rating: Int?,
+    val rating: Double?,
 
     @Json(name = "v_320x320_url")
     val imageUrl: String?,

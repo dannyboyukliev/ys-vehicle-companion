@@ -74,6 +74,11 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging)
     implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
+    ksp(libs.moshi.kotlin.codegen)
+    
+    // Image loading
+    implementation(libs.coil.compose)
 
     // Unit testing
     testImplementation(libs.junit)
