@@ -38,6 +38,7 @@ import com.yamasoft.vehiclecompanion.ui.theme.VehicleCompanionTheme
 @Composable
 fun PlaceDetailBottomSheet(
     place: Poi,
+    isExpanded: Boolean = true,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -145,8 +146,8 @@ fun PlaceDetailBottomSheet(
             Spacer(modifier = Modifier.height(24.dp))
         }
         
-        // Static Mini Map Section
-        if (place.latitude != null && place.longitude != null) {
+        // Static Mini Map Section - Only show when expanded
+        if (isExpanded && place.latitude != null && place.longitude != null) {
             Text(
                 text = "Location",
                 style = MaterialTheme.typography.titleMedium,
