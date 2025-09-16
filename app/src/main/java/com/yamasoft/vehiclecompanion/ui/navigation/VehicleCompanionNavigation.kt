@@ -17,7 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.yamasoft.vehiclecompanion.ui.components.VehicleCompanionBottomBar
-import com.yamasoft.vehiclecompanion.ui.screen.garage.AddVehicleScreen
+import com.yamasoft.vehiclecompanion.ui.screen.garage.add.AddVehicleScreen
 import com.yamasoft.vehiclecompanion.ui.screen.garage.GarageScreen
 
 @Composable
