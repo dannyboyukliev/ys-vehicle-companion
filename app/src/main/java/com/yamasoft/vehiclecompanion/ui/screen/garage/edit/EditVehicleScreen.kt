@@ -53,6 +53,12 @@ fun EditVehicleScreen(
         }
     }
 
+    LaunchedEffect(uiState.isSuccess) {
+        if (uiState.isSuccess) {
+            navController.navigateUp()
+        }
+    }
+
     EditVehicleScreenContent(
         uiState = uiState,
         onNameChange = viewModel::updateName,
