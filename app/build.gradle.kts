@@ -79,6 +79,9 @@ dependencies {
     
     // Image loading
     implementation(libs.coil.compose)
+    
+    // Google Maps
+    implementation(libs.maps.compose)
 
     // Unit testing
     testImplementation(libs.junit)
