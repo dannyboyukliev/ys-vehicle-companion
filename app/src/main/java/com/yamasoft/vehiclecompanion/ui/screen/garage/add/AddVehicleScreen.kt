@@ -18,21 +18,40 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.yamasoft.vehiclecompanion.ui.components.VehicleFormField
 import com.yamasoft.vehiclecompanion.ui.theme.VehicleCompanionTheme
 
 @Composable
-fun AddVehicleScreen(navController: NavController) {
+fun AddVehicleScreen(
+    navController: NavController,
+    viewModel: AddVehicleViewModel = hiltViewModel()
+) {
+    val uiState by viewModel.uiState.collectAsState()
 
-    AddVehicleScreenContent()
+    AddVehicleScreenContent(
+        uiState = uiState,
+        onNameChange = viewModel::updateName,
+        onMakeChange = viewModel::updateMake,
+        onModelChange = viewModel::updateModel,
+        onYearChange = viewModel::updateYear
+    )
 }
 
 @Composable
-private fun AddVehicleScreenContent() {
+private fun AddVehicleScreenContent(
+    uiState: AddVehicleUiState,
+    onNameChange: (String) -> Unit,
+    onMakeChange: (String) -> Unit,
+    onModelChange: (String) -> Unit,
+    onYearChange: (String) -> Unit
+) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -53,8 +72,8 @@ private fun AddVehicleScreenContent() {
             ) {
                 // Vehicle Name
                 VehicleFormField(
-                    value = "",
-                    onValueChange = {},
+                    value = uiState.name,
+                    onValueChange = onNameChange,
                     label = "Vehicle Name",
                 )
 
@@ -66,15 +85,15 @@ private fun AddVehicleScreenContent() {
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     VehicleFormField(
-                        value = "",
-                        onValueChange = {},
+                        value = uiState.make,
+                        onValueChange = onMakeChange,
                         label = "Make",
                         modifier = Modifier.weight(1f),
                     )
 
                     VehicleFormField(
-                        value = "",
-                        onValueChange = {},
+                        value = uiState.model,
+                        onValueChange = onModelChange,
                         label = "Model",
                         modifier = Modifier.weight(1f),
                     )
@@ -84,8 +103,8 @@ private fun AddVehicleScreenContent() {
 
                 // Year
                 VehicleFormField(
-                    value = "",
-                    onValueChange = {},
+                    value = uiState.year,
+                    onValueChange = onYearChange,
                     label = "Year",
                 )
             }
