@@ -27,6 +27,7 @@ import com.yamasoft.vehiclecompanion.ui.theme.VehicleCompanionTheme
 @Composable
 fun VehicleCard(
     vehicle: Vehicle,
+    onVehicleClick: () -> Unit,
     onDeleteButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -34,6 +35,7 @@ fun VehicleCard(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp),
+        onClick = onVehicleClick,
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Row(
@@ -92,6 +94,7 @@ fun VehicleCardPreview() {
         VehicleCard(
             vehicle = myVehicle,
             onDeleteButtonClick = {},
+            onVehicleClick = {}
         )
     }
 }
