@@ -3,6 +3,7 @@ package com.yamasoft.vehiclecompanion.domain.mapper
 import com.yamasoft.vehiclecompanion.data.remote.dto.PoiDto
 import com.yamasoft.vehiclecompanion.data.local.entity.PoiEntity
 import com.yamasoft.vehiclecompanion.domain.model.Poi
+import kotlin.math.roundToInt
 
 // DTO to Domain (from API)
 fun PoiDto.toDomain(): Poi {
@@ -11,7 +12,7 @@ fun PoiDto.toDomain(): Poi {
         name = name,
         url = url,
         category = primaryCategoryDisplayName,
-        rating = rating,
+        rating = rating?.roundToInt(),
         imageUrl = imageUrl,
         latitude = location?.getOrNull(0),
         longitude = location?.getOrNull(1),
