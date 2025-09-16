@@ -94,6 +94,7 @@ fun VehicleCardPreview() {
         VehicleCard(
             vehicle = myVehicle,
             onDeleteButtonClick = {},
+            onVehicleClick = {}
         )
     }
 }
