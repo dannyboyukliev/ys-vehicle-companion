@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -40,7 +41,8 @@ fun AddVehicleScreen(
         onNameChange = viewModel::updateName,
         onMakeChange = viewModel::updateMake,
         onModelChange = viewModel::updateModel,
-        onYearChange = viewModel::updateYear
+        onYearChange = viewModel::updateYear,
+        onSaveButtonClick = viewModel::saveVehicle
     )
 }
 
@@ -50,14 +52,15 @@ private fun AddVehicleScreenContent(
     onNameChange: (String) -> Unit,
     onMakeChange: (String) -> Unit,
     onModelChange: (String) -> Unit,
-    onYearChange: (String) -> Unit
+    onYearChange: (String) -> Unit,
+    onSaveButtonClick: () -> Unit
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("Add Vehicle") }
             )
-        }
+        },
     ) { paddingValues ->
         Box(
             modifier = Modifier
@@ -107,6 +110,20 @@ private fun AddVehicleScreenContent(
                     onValueChange = onYearChange,
                     label = "Year",
                 )
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                // Save Vehicle button
+                Row(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Button(
+                        onClick = onSaveButtonClick,
+                        modifier = Modifier.weight(1f),
+                    ) {
+                        Text("Save Vehicle")
+                    }
+                }
             }
         }
     }
