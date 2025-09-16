@@ -50,6 +50,9 @@ fun GarageScreen(
         onAddVehicleClick = {
             navController.navigate(Route.ADD_VEHICLE)
         },
+        onVehicleClick = { vehicle ->
+            navController.navigate(Route.editVehicle(vehicleId = vehicle.id))
+        },
         onDeleteVehicle = viewModel::deleteVehicle
     )
 }
@@ -58,6 +61,7 @@ fun GarageScreen(
 private fun GarageScreenContent(
     uiState: GarageUiState,
     onAddVehicleClick: () -> Unit,
+    onVehicleClick: (Vehicle) -> Unit,
     onDeleteVehicle: (Vehicle) -> Unit
 ) {
     Box(
@@ -82,6 +86,9 @@ private fun GarageScreenContent(
                         val vehicle = uiState.vehicles[index]
                         VehicleCard(
                             vehicle = vehicle,
+                            onVehicleClick = {
+                                onVehicleClick(vehicle)
+                            },
                             onDeleteButtonClick = {
                                 onDeleteVehicle(vehicle)
                             }
@@ -163,7 +170,8 @@ private fun GarageScreenContentWithVehiclesPreview() {
         GarageScreenContent(
             uiState = GarageUiState(listOf(Vehicle(name = "My Car", make = "Toyota", model = "Avensis", year = 2009))),
             onAddVehicleClick = {},
-            onDeleteVehicle = {}
+            onDeleteVehicle = {},
+            onVehicleClick = {}
         )
     }
 }
