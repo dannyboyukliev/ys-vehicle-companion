@@ -2,6 +2,7 @@ package com.yamasoft.vehiclecompanion.ui.screen.places
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.yamasoft.vehiclecompanion.domain.model.Poi
 import com.yamasoft.vehiclecompanion.domain.repository.PoiRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -46,5 +47,13 @@ class PlacesViewModel @Inject constructor(
                 }
             )
         }
+    }
+
+    fun selectPlace(place: Poi) {
+        _uiState.value = _uiState.value.copy(selectedPlace = place)
+    }
+
+    fun clearSelectedPlace() {
+        _uiState.value = _uiState.value.copy(selectedPlace = null)
     }
 }
