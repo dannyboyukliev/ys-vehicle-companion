@@ -50,9 +50,7 @@ fun GarageScreen(
         onAddVehicleClick = {
             navController.navigate(Route.ADD_VEHICLE)
         },
-        onDeleteVehicle = {
-
-        }
+        onDeleteVehicle = viewModel::deleteVehicle
     )
 }
 
