@@ -27,7 +27,13 @@ class PoiRepositoryImpl @Inject constructor(
             val response = apiService.discoverPois(swCorner, neCorner, pageSize)
             if (response.isSuccessful) {
                 val pois = response.body()?.pois?.mapDtosToDomain() ?: emptyList()
-                Result.success(pois)
+                
+                // Update favorite status from local database
+                val poisWithFavoriteStatus = pois.map { poi ->
+                    poi.copy(isFavorite = poiDao.isPoiFavorite(poi.id))
+                }
+                
+                Result.success(poisWithFavoriteStatus)
             } else {
                 Result.failure(Exception("API Error: ${response.code()} ${response.message()}"))
             }
