@@ -47,7 +47,9 @@ fun GarageScreen(
 
     GarageScreenContent(
         uiState = uiState,
-        onAddVehicleClick = {}
+        onAddVehicleClick = {
+            navController.navigate(Route.ADD_VEHICLE)
+        }
     )
 }
 
