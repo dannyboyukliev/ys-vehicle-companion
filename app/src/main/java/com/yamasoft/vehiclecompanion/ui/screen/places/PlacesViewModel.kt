@@ -56,4 +56,26 @@ class PlacesViewModel @Inject constructor(
     fun clearSelectedPlace() {
         _uiState.value = _uiState.value.copy(selectedPlace = null)
     }
+
+    fun toggleFavoritePlace(place: Poi) {
+        viewModelScope.launch {
+            val newFavoriteStatus = poiRepository.toggleFavorite(place)
+
+            val updatedPlaces = _uiState.value.places.map { poi ->
+                if (poi.id == place.id) {
+                    poi.copy(isFavorite = newFavoriteStatus)
+                } else {
+                    poi
+                }
+            }
+
+            _uiState.value = _uiState.value.copy(places = updatedPlaces)
+
+            if (_uiState.value.selectedPlace?.id == place.id) {
+                _uiState.value = _uiState.value.copy(
+                    selectedPlace = place.copy(isFavorite = newFavoriteStatus)
+                )
+            }
+        }
+    }
 }

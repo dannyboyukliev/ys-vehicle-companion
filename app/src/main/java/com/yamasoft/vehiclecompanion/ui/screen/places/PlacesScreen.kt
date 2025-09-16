@@ -36,6 +36,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import android.content.Intent
 import android.net.Uri
+import com.yamasoft.vehiclecompanion.domain.model.Poi
 import com.yamasoft.vehiclecompanion.ui.components.PoiCard
 import com.yamasoft.vehiclecompanion.ui.components.VehicleCard
 import com.yamasoft.vehiclecompanion.ui.screen.places.detail.PlaceDetailBottomSheet
@@ -70,6 +71,9 @@ fun PlacesScreen(
                         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                         context.startActivity(intent)
                     },
+                    onFavoriteButtonClick = {
+                        viewModel.toggleFavoritePlace(place)
+                    },
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
             }
@@ -78,9 +82,8 @@ fun PlacesScreen(
     ) {
         PlacesScreenContent(
             uiState = uiState,
-            onPlaceClick = { place ->
-                viewModel.selectPlace(place)
-            }
+            onToggleFavoritePoi = viewModel::toggleFavoritePlace,
+            onPlaceClick = viewModel::selectPlace
         )
     }
 }
@@ -88,7 +91,8 @@ fun PlacesScreen(
 @Composable
 private fun PlacesScreenContent(
     uiState: PlacesUiState,
-    onPlaceClick: (com.yamasoft.vehiclecompanion.domain.model.Poi) -> Unit = {}
+    onToggleFavoritePoi: (Poi) -> Unit = {},
+    onPlaceClick: (Poi) -> Unit = {}
 ) {
     Box(
         modifier = Modifier
@@ -114,6 +118,9 @@ private fun PlacesScreenContent(
                         val poi = uiState.places[index]
                         PoiCard(
                             poi = poi,
+                            onFavoriteButtonClick = {
+                                onToggleFavoritePoi(poi)
+                            },
                             modifier = Modifier.clickable {
                                 onPlaceClick(poi)
                             }

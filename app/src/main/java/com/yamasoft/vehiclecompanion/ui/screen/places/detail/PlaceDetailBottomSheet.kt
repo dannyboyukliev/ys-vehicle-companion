@@ -45,6 +45,7 @@ fun PlaceDetailBottomSheet(
     place: Poi,
     isExpanded: Boolean = true,
     onDismiss: () -> Unit = {},
+    onFavoriteButtonClick: () -> Unit = {},
     onOpenInBrowser: (String) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
@@ -141,19 +142,23 @@ fun PlaceDetailBottomSheet(
                 }
             }
 
-            if (place.isFavorite) {
-                Icon(
-                    imageVector = Icons.Default.Favorite,
-                    contentDescription = "Remove ${place.name} from favorites",
-                    tint = Color.Red,
-                    modifier = Modifier.size(28.dp)
-                )
-            } else {
-                Icon(
-                    imageVector = Icons.Default.FavoriteBorder,
-                    contentDescription = "Favorite ${place.name}",
-                    modifier = Modifier.size(28.dp)
-                )
+            IconButton(
+                onClick = onFavoriteButtonClick
+            ) {
+                if (place.isFavorite) {
+                    Icon(
+                        imageVector = Icons.Default.Favorite,
+                        contentDescription = "Remove ${place.name} from favorites",
+                        tint = Color.Red,
+                        modifier = Modifier.size(28.dp)
+                    )
+                } else {
+                    Icon(
+                        imageVector = Icons.Default.FavoriteBorder,
+                        contentDescription = "Favorite ${place.name}",
+                        modifier = Modifier.size(28.dp)
+                    )
+                }
             }
         }
         
