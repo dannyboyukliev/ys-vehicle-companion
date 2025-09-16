@@ -21,6 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -61,6 +62,7 @@ fun EditVehicleScreen(
 
     EditVehicleScreenContent(
         uiState = uiState,
+        snackbarHostState = snackbarHostState,
         onNameChange = viewModel::updateName,
         onMakeChange = viewModel::updateMake,
         onModelChange = viewModel::updateModel,
@@ -75,6 +77,7 @@ fun EditVehicleScreen(
 @Composable
 fun EditVehicleScreenContent(
     uiState: EditVehicleUiState,
+    snackbarHostState: SnackbarHostState,
     onNameChange: (String) -> Unit,
     onMakeChange: (String) -> Unit,
     onModelChange: (String) -> Unit,
@@ -98,6 +101,7 @@ fun EditVehicleScreenContent(
                 }
             )
         },
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { paddingValues ->
         Box(
             modifier = Modifier
