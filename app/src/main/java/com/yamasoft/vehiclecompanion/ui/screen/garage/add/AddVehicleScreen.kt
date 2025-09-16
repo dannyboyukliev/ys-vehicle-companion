@@ -13,8 +13,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -49,6 +53,9 @@ fun AddVehicleScreen(
         onMakeChange = viewModel::updateMake,
         onModelChange = viewModel::updateModel,
         onYearChange = viewModel::updateYear,
+        onBackButtonClick = {
+            navController.navigateUp()
+        },
         onSaveButtonClick = viewModel::saveVehicle
     )
 }
@@ -60,12 +67,23 @@ private fun AddVehicleScreenContent(
     onMakeChange: (String) -> Unit,
     onModelChange: (String) -> Unit,
     onYearChange: (String) -> Unit,
+    onBackButtonClick: () -> Unit,
     onSaveButtonClick: () -> Unit
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Add Vehicle") }
+                title = { Text("Add Vehicle") },
+                navigationIcon = {
+                    IconButton(
+                        onClick = onBackButtonClick
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back"
+                        )
+                    }
+                }
             )
         },
     ) { paddingValues ->
