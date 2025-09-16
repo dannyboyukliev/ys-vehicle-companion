@@ -56,6 +56,10 @@ class AddVehicleViewModel @Inject constructor(
             )
 
             vehicleRepository.insertVehicle(vehicle)
+
+            _uiState.value = _uiState.value.copy(
+                isSuccess = true
+            )
         }
     }
 }
