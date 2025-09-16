@@ -13,12 +13,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,6 +41,7 @@ import com.yamasoft.vehiclecompanion.ui.theme.VehicleCompanionTheme
 fun PlaceDetailBottomSheet(
     place: Poi,
     isExpanded: Boolean = true,
+    onDismiss: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -46,6 +49,23 @@ fun PlaceDetailBottomSheet(
             .fillMaxWidth()
             .padding(24.dp)
     ) {
+        // Close button row
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
+        ) {
+            IconButton(
+                onClick = onDismiss,
+                modifier = Modifier.size(32.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = "Close",
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+        
         // Header with place image and basic info
         Row(
             modifier = Modifier.fillMaxWidth(),

@@ -61,6 +61,7 @@ fun PlacesScreen(
                 PlaceDetailBottomSheet(
                     place = place,
                     isExpanded = isExpanded,
+                    onDismiss = { viewModel.clearSelectedPlace() },
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
             }
