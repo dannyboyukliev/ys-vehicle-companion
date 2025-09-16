@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.yamasoft.vehiclecompanion.ui.screen.places
 
 import androidx.compose.foundation.layout.Arrangement
@@ -11,11 +13,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -35,8 +40,16 @@ fun PlacesScreen(
     viewModel: PlacesViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val scaffoldState = rememberBottomSheetScaffoldState()
 
-    PlacesScreenContent(uiState)
+    BottomSheetScaffold(
+        scaffoldState = scaffoldState,
+        sheetContent = {
+            
+        }
+    ) {
+        PlacesScreenContent(uiState)
+    }
 }
 
 @Composable
