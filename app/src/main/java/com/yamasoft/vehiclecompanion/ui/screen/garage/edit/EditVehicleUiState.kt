@@ -6,4 +6,5 @@ data class EditVehicleUiState(
     val model: String = "",
     val year: String = "",
     val isSuccess: Boolean = false,
+    val errorMessage: String? = null,
 )
