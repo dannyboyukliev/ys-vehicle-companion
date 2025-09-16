@@ -1,5 +1,7 @@
 package com.yamasoft.vehiclecompanion.di
 
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.yamasoft.vehiclecompanion.data.remote.api.RoadtrippersApiService
 import dagger.Module
 import dagger.Provides
@@ -26,11 +28,11 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://api2.roadtrippers.com/api/v2/") // base URL
             .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
     }
 
@@ -38,5 +40,13 @@ object NetworkModule {
     @Singleton
     fun provideRoadtrippersApiService(retrofit: Retrofit): RoadtrippersApiService {
         return retrofit.create(RoadtrippersApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMoshi(): Moshi {
+        return Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
     }
 }
