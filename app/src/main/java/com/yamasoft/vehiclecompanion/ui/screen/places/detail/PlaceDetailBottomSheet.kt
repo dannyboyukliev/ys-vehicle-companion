@@ -41,6 +41,7 @@ import coil.compose.AsyncImage
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
@@ -243,7 +244,16 @@ fun PlaceDetailBottomSheet(
                         .fillMaxWidth()
                         .height(200.dp)
                         .clip(RoundedCornerShape(12.dp)),
-                    cameraPositionState = cameraPositionState
+                    cameraPositionState = cameraPositionState,
+                    uiSettings = MapUiSettings(
+                        zoomControlsEnabled = false,
+                        zoomGesturesEnabled = false,
+                        scrollGesturesEnabled = false,
+                        tiltGesturesEnabled = false,
+                        rotationGesturesEnabled = false,
+                        scrollGesturesEnabledDuringRotateOrZoom = false,
+                        mapToolbarEnabled = false
+                    )
                 ) {
                     Marker(
                         state = MarkerState(position = location),
