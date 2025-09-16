@@ -2,6 +2,7 @@ package com.yamasoft.vehiclecompanion.ui.screen.garage
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.yamasoft.vehiclecompanion.domain.model.Vehicle
 import com.yamasoft.vehiclecompanion.domain.repository.VehicleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -34,6 +35,12 @@ class GarageViewModel @Inject constructor(
                         )
                     }
                 }
+        }
+    }
+
+    fun deleteVehicle(vehicle: Vehicle) {
+        viewModelScope.launch {
+            vehicleRepository.deleteVehicle(vehicle)
         }
     }
 }
