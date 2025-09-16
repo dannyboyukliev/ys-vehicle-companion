@@ -17,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.yamasoft.vehiclecompanion.ui.components.VehicleCompanionBottomBar
+import com.yamasoft.vehiclecompanion.ui.screen.garage.GarageScreen
 
 @Composable
 fun MainScreen() {
@@ -63,7 +64,7 @@ fun VehicleCompanionNavigation(
             modifier = Modifier.padding(paddingValues)
         ) {
             composable(Route.GARAGE) {
-                PlaceholderScreen(title = "Garage", description = "Vehicle management coming soon...")
+                GarageScreen(navController)
             }
 
             composable(Route.PLACES) {
