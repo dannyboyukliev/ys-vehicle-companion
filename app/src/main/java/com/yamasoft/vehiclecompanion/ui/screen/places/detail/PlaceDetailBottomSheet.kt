@@ -17,6 +17,7 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -42,6 +43,7 @@ fun PlaceDetailBottomSheet(
     place: Poi,
     isExpanded: Boolean = true,
     onDismiss: () -> Unit = {},
+    onOpenInBrowser: (String) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -161,6 +163,18 @@ fun PlaceDetailBottomSheet(
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
+            }
+            
+            Spacer(modifier = Modifier.height(24.dp))
+        }
+        
+        // Open in Browser Button - Show if URL is available
+        place.url?.let { url ->
+            Button(
+                onClick = { onOpenInBrowser(url) },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Open in Browser")
             }
             
             Spacer(modifier = Modifier.height(24.dp))
