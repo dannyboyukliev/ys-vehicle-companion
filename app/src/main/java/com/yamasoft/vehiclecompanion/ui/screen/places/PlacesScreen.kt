@@ -3,10 +3,12 @@ package com.yamasoft.vehiclecompanion.ui.screen.places
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
@@ -23,6 +25,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.yamasoft.vehiclecompanion.ui.components.PoiCard
+import com.yamasoft.vehiclecompanion.ui.components.VehicleCard
 import com.yamasoft.vehiclecompanion.ui.theme.VehicleCompanionTheme
 
 @Composable
@@ -39,7 +43,35 @@ fun PlacesScreen(
 private fun PlacesScreenContent(
     uiState: PlacesUiState
 ) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        when {
+            uiState.isLoading -> {
+                LoadingPlacesState()
+            }
 
+            uiState.error != null -> {
+                ErrorPlacesState(uiState.error) { }
+            }
+
+            else -> {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    items(
+                        count = uiState.places.size,
+                    ) { index ->
+                        val poi = uiState.places[index]
+                        PoiCard(poi = poi)
+                    }
+                }
+            }
+        }
+    }
 }
 
 @Composable
