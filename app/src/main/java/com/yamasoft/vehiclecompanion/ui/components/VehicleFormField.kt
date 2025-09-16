@@ -32,7 +32,7 @@ fun VehicleFormField(
 
 @Preview(showBackground = true)
 @Composable
-fun VehicleFormFieldPreview() {
+private fun VehicleFormFieldPreview() {
     VehicleCompanionTheme {
         VehicleFormField(
             value = "2",
