@@ -20,6 +20,7 @@ import com.yamasoft.vehiclecompanion.ui.components.VehicleCompanionBottomBar
 import com.yamasoft.vehiclecompanion.ui.screen.garage.add.AddVehicleScreen
 import com.yamasoft.vehiclecompanion.ui.screen.garage.GarageScreen
 import com.yamasoft.vehiclecompanion.ui.screen.garage.edit.EditVehicleScreen
+import com.yamasoft.vehiclecompanion.ui.screen.places.PlacesScreen
 
 @Composable
 fun MainScreen() {
@@ -70,7 +71,7 @@ fun VehicleCompanionNavigation(
             }
 
             composable(Route.PLACES) {
-                PlaceholderScreen(title = "Places", description = "POI discovery coming soon...")
+                PlacesScreen(navController)
             }
 
             composable(Route.ADD_VEHICLE) {
