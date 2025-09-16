@@ -60,7 +60,6 @@ private fun PlacesScreenContent(
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     items(
                         count = uiState.places.size,
