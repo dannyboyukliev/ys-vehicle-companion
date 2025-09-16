@@ -1,0 +1,114 @@
+package com.yamasoft.vehiclecompanion.ui.components
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Place
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.yamasoft.vehiclecompanion.domain.model.Poi
+import com.yamasoft.vehiclecompanion.ui.theme.VehicleCompanionTheme
+
+@Composable
+fun PoiCard(
+    poi: Poi,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            // POI Image/Icon
+            Card(
+                modifier = Modifier.size(48.dp),
+                shape = RoundedCornerShape(8.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant
+                )
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Place,
+                    contentDescription = "POI Icon",
+                    modifier = Modifier
+                        .size(48.dp)
+                        .padding(12.dp),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            
+            Spacer(modifier = Modifier.width(16.dp))
+            
+            // POI Information
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(
+                    text = poi.name,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                
+                poi.category?.let { category ->
+                    Text(
+                        text = category,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+                
+                poi.rating?.let { rating ->
+                    Text(
+                        text = "Rating: $rating/5",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun PoiCardPreview() {
+    VehicleCompanionTheme {
+        val dummyPoi = Poi(
+            id = 1,
+            name = "Shell Gas Station",
+            url = "https://www.shell.com/motorist/shell-station-locator.html",
+            category = "Gas Station",
+            rating = 4,
+            imageUrl = "https://example.com/shell-station.jpg",
+            latitude = 37.7749,
+            longitude = -122.4194,
+            isFavorite = false
+        )
+        PoiCard(poi = dummyPoi)
+    }
+}
