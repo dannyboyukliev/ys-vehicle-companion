@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class EditVehicleViewModel @Inject constructor(
     private val vehicleRepository: VehicleRepository,
@@ -73,7 +72,7 @@ class EditVehicleViewModel @Inject constructor(
         )
     }
 
-    fun saveVehicle() {
+    fun updateVehicle() {
         val currentState = _uiState.value
 
         viewModelScope.launch {
@@ -84,7 +83,7 @@ class EditVehicleViewModel @Inject constructor(
                 year = currentState.year.toInt(),
             )
 
-            vehicleRepository.insertVehicle(vehicle)
+            vehicleRepository.updateVehicle(vehicle)
 
             _uiState.value = _uiState.value.copy(
                 isSuccess = true
