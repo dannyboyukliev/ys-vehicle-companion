@@ -11,16 +11,20 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -33,6 +37,7 @@ import com.yamasoft.vehiclecompanion.ui.theme.VehicleCompanionTheme
 @Composable
 fun PoiCard(
     poi: Poi,
+    onFavoriteButtonClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -44,7 +49,8 @@ fun PoiCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             // POI Image/Icon
             Card(
@@ -111,25 +117,53 @@ fun PoiCard(
                     )
                 }
             }
+
+            IconButton(
+                onClick = onFavoriteButtonClick
+            ) {
+                if (poi.isFavorite) {
+                    Icon(
+                        imageVector = Icons.Default.Favorite,
+                        contentDescription = "Remove ${poi.name} from favorites",
+                        tint = Color.Red,
+                        modifier = Modifier.size(28.dp)
+                    )
+                } else {
+                    Icon(
+                        imageVector = Icons.Default.FavoriteBorder,
+                        contentDescription = "Favorite ${poi.name}",
+                        modifier = Modifier.size(28.dp)
+                    )
+                }
+            }
         }
+    }
+}
+
+val dummyPoi = Poi(
+    id = 1,
+    name = "Shell Gas Station",
+    url = "https://www.shell.com/motorist/shell-station-locator.html",
+    category = "Gas Station",
+    rating = 4,
+    imageUrl = "https://example.com/shell-station.jpg",
+    latitude = 37.7749,
+    longitude = -122.4194,
+    isFavorite = false
+)
+@Preview(showBackground = true)
+@Composable
+private fun PoiCardPreview() {
+    VehicleCompanionTheme {
+        PoiCard(poi = dummyPoi)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun PoiCardPreview() {
+private fun PoiCardFavoritedPreview() {
     VehicleCompanionTheme {
-        val dummyPoi = Poi(
-            id = 1,
-            name = "Shell Gas Station",
-            url = "https://www.shell.com/motorist/shell-station-locator.html",
-            category = "Gas Station",
-            rating = 4,
-            imageUrl = "https://example.com/shell-station.jpg",
-            latitude = 37.7749,
-            longitude = -122.4194,
-            isFavorite = false
-        )
-        PoiCard(poi = dummyPoi)
+        val dummyFavoritedPoi = dummyPoi.copy(isFavorite = true)
+        PoiCard(poi = dummyFavoritedPoi)
     }
 }
