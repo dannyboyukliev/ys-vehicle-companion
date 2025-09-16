@@ -1,8 +1,10 @@
 package com.yamasoft.vehiclecompanion.ui.components
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -16,11 +18,15 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.yamasoft.vehiclecompanion.domain.model.Poi
 import com.yamasoft.vehiclecompanion.ui.theme.VehicleCompanionTheme
 
@@ -48,14 +54,29 @@ fun PoiCard(
                     containerColor = MaterialTheme.colorScheme.surfaceVariant
                 )
             ) {
-                Icon(
-                    imageVector = Icons.Default.Place,
-                    contentDescription = "POI Icon",
-                    modifier = Modifier
-                        .size(48.dp)
-                        .padding(12.dp),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    if (!poi.imageUrl.isNullOrBlank()) {
+                        AsyncImage(
+                            model = poi.imageUrl,
+                            contentDescription = "POI Icon",
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .clip(RoundedCornerShape(8.dp)),
+                            contentScale = ContentScale.Crop
+                        )
+                    } else {
+                        Icon(
+                            imageVector = Icons.Default.Place,
+                            contentDescription = "POI Icon",
+                            modifier = Modifier
+                                .size(24.dp),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
             }
             
             Spacer(modifier = Modifier.width(16.dp))
