@@ -76,18 +76,26 @@ class EditVehicleViewModel @Inject constructor(
         val currentState = _uiState.value
 
         viewModelScope.launch {
-            val vehicle = Vehicle(
-                name = currentState.name.trim(),
-                make = currentState.make.trim(),
-                model = currentState.model.trim(),
-                year = currentState.year.toInt(),
-            )
+            try {
+                val vehicle = Vehicle(
+                    id = vehicleId, // Include the vehicle ID for the update
+                    name = currentState.name.trim(),
+                    make = currentState.make.trim(),
+                    model = currentState.model.trim(),
+                    year = currentState.year.toInt(),
+                )
 
-            vehicleRepository.updateVehicle(vehicle)
+                vehicleRepository.updateVehicle(vehicle)
 
-            _uiState.value = _uiState.value.copy(
-                isSuccess = true
-            )
+                _uiState.value = _uiState.value.copy(
+                    isSuccess = true
+                )
+            } catch (e: Exception) {
+                // Handle update failure
+                _uiState.value = _uiState.value.copy(
+                    errorMessage = "Failed to update vehicle: ${e.message}"
+                )
+            }
         }
     }
 }
