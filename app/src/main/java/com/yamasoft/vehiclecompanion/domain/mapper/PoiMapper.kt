@@ -14,8 +14,8 @@ fun PoiDto.toDomain(): Poi {
         category = primaryCategoryDisplayName,
         rating = rating?.roundToInt(),
         imageUrl = imageUrl,
-        latitude = location?.getOrNull(0),
-        longitude = location?.getOrNull(1),
+        latitude = location?.getOrNull(1),
+        longitude = location?.getOrNull(0),
         isFavorite = false
     )
 }
