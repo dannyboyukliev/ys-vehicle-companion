@@ -37,6 +37,7 @@ import com.yamasoft.vehiclecompanion.ui.theme.VehicleCompanionTheme
 @Composable
 fun PoiCard(
     poi: Poi,
+    onFavoriteButtonClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -118,7 +119,7 @@ fun PoiCard(
             }
 
             IconButton(
-                onClick = {}
+                onClick = onFavoriteButtonClick
             ) {
                 if (poi.isFavorite) {
                     Icon(
