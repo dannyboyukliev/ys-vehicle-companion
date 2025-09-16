@@ -4,5 +4,6 @@ data class AddVehicleUiState(
     val name: String = "",
     val make: String = "",
     val model: String = "",
-    val year: String = ""
+    val year: String = "",
+    val isSuccess: Boolean = false,
 )
