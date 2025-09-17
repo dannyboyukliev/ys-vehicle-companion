@@ -67,6 +67,7 @@ app/src/main/java/com/yamasoft/vehiclecompanion/
 - **Maps**: Google Maps for Compose
 - **Coroutines**: Kotlin Coroutines for async operations
 - **Build System**: Gradle with Version Catalog (libs.versions.toml)
+- **Testing**: JUnit 4, MockK for mocking, Kotlin Coroutines Test
 
 ## Setup & Installation
 
@@ -85,12 +86,12 @@ app/src/main/java/com/yamasoft/vehiclecompanion/
    ```
 
 2. **Configure Google Maps API Key**
-    - Create a `local.properties` file in the root directory
-    - Add your Google Maps API key:
-      ```properties
-      GOOGLE_MAPS_API_KEY=your_api_key_here
-      ```
-    - Enable Maps SDK for Android in Google Cloud Console
+   - Create a `local.properties` file in the root directory
+   - Add your Google Maps API key:
+     ```properties
+     GOOGLE_MAPS_API_KEY=your_api_key_here
+     ```
+   - Enable Maps SDK for Android in Google Cloud Console
 
 3. **Build and Run**
    ```bash
@@ -116,9 +117,17 @@ https://api2.roadtrippers.com/api/v2/pois/discover?sw_corner=-84.540499,39.07988
 ```
 
 ### Test Coverage
-- **Unit Tests**: Vehicle data class validation, API service mocking
-- **Integration Tests**: Repository layer testing with MockK
+- **Unit Tests**:
+   - `VehicleDataClassTest` - Vehicle data class validation and creation
+   - `PlaceServiceTest` - API service layer testing with comprehensive scenarios
+- **Integration Tests**:
+   - `PoiRepositoryTest` - Repository layer testing with database and API integration
 - **UI Tests**: Compose UI testing for vehicle and place cards (optional)
+
+### Test Scenarios Covered
+- **PlaceServiceTest**: Success responses, empty responses, error handling, network exceptions, multiple places, null field handling
+- **PoiRepositoryTest**: API integration, database favorite status, error scenarios, data mapping
+- **VehicleDataClassTest**: Vehicle creation with required fields validation
 
 ### Test Structure
 ```
