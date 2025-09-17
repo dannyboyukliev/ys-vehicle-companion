@@ -96,20 +96,19 @@ private fun GarageScreenContent(
                         )
                     }
                 }
-            }
-        }
 
-        // FAB button always visible
-        FloatingActionButton(
-            onClick = onAddVehicleClick,
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .padding(16.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Add,
-                contentDescription = "Add Vehicle"
-            )
+                FloatingActionButton(
+                    onClick = onAddVehicleClick,
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(16.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = "Add Vehicle"
+                    )
+                }
+            }
         }
     }
 }
